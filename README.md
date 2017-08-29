@@ -51,5 +51,5 @@ MC_PORT = 25565      -- MC服务器的端口号，25565是默认端口
 5. Orange Client再连接Orange Server，获得SOCKET Y，用于转发
 6. Orange Client连接Minecraft的服务器，获得SOCKET Z，用于转发
 ```
-玩家 --X--> Orange Server --Y--> Orange Client --Z--> Minecrafe
+玩家 --X--> Orange Server --Y--> Orange Client --Z--> Minecraft
 ```
