@@ -148,7 +148,11 @@ int mainloop(int orange)
 	{
 		if(event.data.fd == orange)
 		{
-			read(orange, data, 1024);
+			if(read(orange, data, 1024) <= 0)
+			{
+				return -1;
+			}
+			
 			int orange2 = connect_server();
 			int mc = connect_mc();
 			
