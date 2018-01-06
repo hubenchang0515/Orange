@@ -3,6 +3,33 @@
 仅随手所写，也未详细测试，可能存在大量BUG，欢迎指正。
 
 ## 编译
+### 不使用Lua作为配置文件
+编译前需要在源码中进行ip地址和端口的设置
+server.c第101行
+```C
+#else
+	player_port = 25565;         
+	orange_client_port = 25566;
+#endif
+```
+
+client.c第92行
+```C
+#else
+	strncpy(mc_ipv4,"0.0.0.0",32);
+	strncpy(orange_server_ipv4,"0.0.0.0",32); // TODO 通常只需将Orange服务器的ip地址写在这里即可
+	mc_port = 25565;
+	orange_server_port = 25566;
+#endif
+```
+
+
+```bash
+make
+```
+
+
+### 使用Lua作为配置文件
 由于依赖Lua5.3作为配置文件，因此需要安装Lua。
 
 * 从Lua官网下载Lua5.3的源码
@@ -18,7 +45,7 @@ sudo make install
 
 * 回到Orange的目录编译Orange
 ```bash
-make
+make USE_LUA
 ```
 
 ## 运行

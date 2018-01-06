@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
@@ -7,8 +8,10 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/epoll.h>
-#include <lualib.h>
-#include <lauxlib.h>
+#ifdef USE_LUA
+#	include <lualib.h>
+#	include <lauxlib.h>
+#endif
 
 #ifndef SOCKET_MAX
 #	define SOCKET_MAX 1024
@@ -269,7 +272,6 @@ int mainloop(int client,int client_listener, int player_listener)
 			ssize_t data_len = read(fd, data, 1024);
 			if(data_len > 0)
 			{
-				write(STDOUT_FILENO, data ,data_len);
 				write(sockets[fd], data, data_len);
 			}
 			else

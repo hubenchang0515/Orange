@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
@@ -7,8 +8,10 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/epoll.h>
-#include <lualib.h>
-#include <lauxlib.h>
+#ifdef USE_LUA
+#	include <lualib.h>
+#	include <lauxlib.h>
+#endif
 
 #ifndef SOCKET_MAX
 #	define SOCKET_MAX 1024
@@ -88,7 +91,7 @@ int config()
 	lua_close(L);
 #else
 	strncpy(mc_ipv4,"0.0.0.0",32);
-	strncpy(orange_server_ipv4,"0.0.0.0",32);
+	strncpy(orange_server_ipv4,"0.0.0.0",32); // TODO set IPv4 address of orange_server here
 	mc_port = 25565;
 	orange_server_port = 25566;
 #endif

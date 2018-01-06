@@ -1,10 +1,10 @@
-all : server client
+all : server.c client.c
+	gcc -o server server.c -W -Wall
+	gcc -o client client.c -W -Wall
 
-server : server.c
+USE_LUA : 
 	gcc -o server server.c -W -Wall -DUSE_LUA -llua -lm
-	
-client : client.c
 	gcc -o client client.c -W -Wall -DUSE_LUA -llua -lm
-	
+
 clean :
 	rm server client
